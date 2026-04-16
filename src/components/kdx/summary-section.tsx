@@ -1,5 +1,6 @@
 'use client'
 
+import { summaryData } from '@/lib/channels'
 import { Table2 } from 'lucide-react'
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
@@ -11,59 +12,6 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table'
-
-interface SummaryRow {
-  channel: string
-  primaryVisual: string
-  recordingFocus: string
-  bRollNeeded: string
-  videoLength: string
-}
-
-const summaryData: SummaryRow[] = [
-  {
-    channel: 'AI for Hackers',
-    primaryVisual: 'AI Chat Screen',
-    recordingFocus: 'Prompt → Response → Terminal Test',
-    bRollNeeded: 'Light cybersecurity (Pexels/Pixabay)',
-    videoLength: '5-8 min',
-  },
-  {
-    channel: 'BlackArch Arsenal',
-    primaryVisual: 'Terminal',
-    recordingFocus: 'Commands + Output (tool demo)',
-    bRollNeeded: 'Minimal',
-    videoLength: '6-10 min',
-  },
-  {
-    channel: 'CTF Solved',
-    primaryVisual: 'Full Desktop',
-    recordingFocus: 'Walkthrough (Enum → Exploit → Privesc → Flag)',
-    bRollNeeded: 'None',
-    videoLength: '8-15 min',
-  },
-  {
-    channel: 'CVE Explained',
-    primaryVisual: 'Stock Footage',
-    recordingFocus: 'Voiceover + Diagrams + Graphics',
-    bRollNeeded: 'Heavy (Pexels/Pixabay/Mixkit)',
-    videoLength: '3-5 min',
-  },
-  {
-    channel: 'AI Builds',
-    primaryVisual: 'AI Chat + Browser',
-    recordingFocus: 'Code generation + Live testing',
-    bRollNeeded: 'Minimal',
-    videoLength: '6-10 min',
-  },
-  {
-    channel: 'Arch Security Lab',
-    primaryVisual: 'Terminal',
-    recordingFocus: 'Commands + Config + Verification',
-    bRollNeeded: 'None',
-    videoLength: '5-8 min',
-  },
-]
 
 export function SummarySection() {
   return (
@@ -86,7 +34,7 @@ export function SummarySection() {
         <Card className="border-border/50 bg-card">
           <CardHeader className="pb-2">
             <CardTitle className="flex items-center gap-2 text-base">
-              <Table2 className="size-5 text-primary" />
+              <Table2 className="size-5 text-primary" aria-hidden="true" />
               Channel Summary Table
             </CardTitle>
           </CardHeader>

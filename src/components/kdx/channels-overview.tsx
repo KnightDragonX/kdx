@@ -9,78 +9,18 @@ import {
   Terminal,
   type LucideIcon,
 } from 'lucide-react'
+import { channelsOverview } from '@/lib/channels'
 import { Card, CardHeader, CardContent } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 
-interface ChannelCard {
-  id: number
-  name: string
-  icon: LucideIcon
-  description: string
-  focus: string
-  rpm: string
-  contentType: string
+const iconMap: Record<string, LucideIcon> = {
+  Bot,
+  Shield,
+  Flag,
+  Newspaper,
+  Wrench,
+  Terminal,
 }
-
-const channels: ChannelCard[] = [
-  {
-    id: 1,
-    name: 'AI for Hackers',
-    icon: Bot,
-    description:
-      'Exploring how free AI chat tools can assist in ethical hacking.',
-    focus: 'AI Prompts + Hacking',
-    rpm: '$9-$25 RPM',
-    contentType: 'Screen Only',
-  },
-  {
-    id: 2,
-    name: 'BlackArch Arsenal',
-    icon: Shield,
-    description: 'Master the 2,800+ tools inside BlackArch Linux.',
-    focus: 'Tool Tutorials',
-    rpm: '$9-$28 RPM',
-    contentType: 'Terminal',
-  },
-  {
-    id: 3,
-    name: 'CTF Solved',
-    icon: Flag,
-    description:
-      'Step-by-step walkthroughs of TryHackMe rooms and HackTheBox machines.',
-    focus: 'Room Solutions',
-    rpm: '$7-$18 RPM',
-    contentType: 'Screen Record',
-  },
-  {
-    id: 4,
-    name: 'CVE Explained',
-    icon: Newspaper,
-    description: 'Daily breakdowns of critical newly discovered vulnerabilities.',
-    focus: 'News/Education',
-    rpm: '$5-$14 RPM',
-    contentType: 'Stock Footage',
-  },
-  {
-    id: 5,
-    name: 'AI Builds',
-    icon: Wrench,
-    description: 'Building real apps and automations using ONLY free AI chat.',
-    focus: 'Project Builds',
-    rpm: '$6-$18 RPM',
-    contentType: 'Screen Record',
-  },
-  {
-    id: 6,
-    name: 'Arch Security Lab',
-    icon: Terminal,
-    description:
-      'Turn your Arch-based system into a professional pentest environment.',
-    focus: 'Security Config',
-    rpm: '$5-$14 RPM',
-    contentType: 'Terminal',
-  },
-]
 
 export function ChannelsOverview() {
   return (
@@ -103,8 +43,8 @@ export function ChannelsOverview() {
 
         {/* Channel Cards Grid */}
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {channels.map((channel) => {
-            const Icon = channel.icon
+          {channelsOverview.map((channel) => {
+            const Icon = iconMap[channel.icon] || Bot
             return (
               <Card
                 key={channel.id}
@@ -114,7 +54,7 @@ export function ChannelsOverview() {
                   <div className="flex items-start justify-between">
                     <div className="flex items-center gap-3">
                       <div className="flex size-10 items-center justify-center rounded-lg bg-primary/10 text-primary transition-colors group-hover:bg-primary/20">
-                        <Icon className="size-5" />
+                        <Icon className="size-5" aria-hidden="true" />
                       </div>
                       <div>
                         <h3 className="font-semibold text-foreground">

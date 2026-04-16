@@ -10,6 +10,9 @@ import { ToolsSection } from '@/components/kdx/tools-section'
 import { KdenliveReference } from '@/components/kdx/kdenlive-reference'
 import { SummarySection } from '@/components/kdx/summary-section'
 import { Footer } from '@/components/kdx/footer'
+import { BackToTop } from '@/components/kdx/back-to-top'
+import { VideoSearch } from '@/components/kdx/video-search'
+import { ThumbnailPreview } from '@/components/kdx/thumbnail-preview'
 import { Separator } from '@/components/ui/separator'
 
 export default function Home() {
@@ -25,6 +28,10 @@ export default function Home() {
         <Separator className="mx-auto max-w-7xl opacity-20" />
         <ThumbnailGuide />
         <Separator className="mx-auto max-w-7xl opacity-20" />
+        <ThumbnailPreview />
+        <Separator className="mx-auto max-w-7xl opacity-20" />
+        <VideoSearch />
+        <Separator className="mx-auto max-w-7xl opacity-20" />
         <ChannelsSection />
         <Separator className="mx-auto max-w-7xl opacity-20" />
         <ToolsSection />
@@ -34,6 +41,7 @@ export default function Home() {
         <SummarySection />
       </main>
       <Footer />
+      <BackToTop />
     </div>
   )
 }
