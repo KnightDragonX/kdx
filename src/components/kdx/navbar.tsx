@@ -18,6 +18,9 @@ const navLinks = [
   { label: 'Thumbnail Guide', href: '#thumbnail' },
   { label: 'Search', href: '#search' },
   { label: 'Channels', href: '#channels' },
+  { label: 'Scripts', href: '#script-templates' },
+  { label: 'Recording', href: '#recording-setup' },
+  { label: 'Footage', href: '#footage' },
   { label: 'Tools', href: '#tools' },
   { label: 'Summary', href: '#summary' },
 ]
@@ -40,6 +43,7 @@ export function Navbar() {
         <button
           onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
           className="flex items-center gap-2 transition-opacity hover:opacity-80"
+          aria-label="Scroll to top"
         >
           <span className="text-2xl" role="img" aria-label="Dragon">
             🐉
@@ -50,12 +54,12 @@ export function Navbar() {
         </button>
 
         {/* Desktop Nav */}
-        <nav className="hidden items-center gap-1 md:flex">
+        <nav className="hidden items-center gap-1 lg:flex">
           {navLinks.map((link) => (
             <button
               key={link.href}
               onClick={() => handleClick(link.href)}
-              className="rounded-md px-3 py-1.5 text-sm text-muted-foreground transition-colors hover:bg-primary/10 hover:text-primary"
+              className="rounded-md px-2.5 py-1.5 text-xs text-muted-foreground transition-colors hover:bg-primary/10 hover:text-primary"
             >
               {link.label}
             </button>
@@ -66,7 +70,7 @@ export function Navbar() {
         </nav>
 
         {/* Mobile Nav */}
-        <div className="flex items-center gap-2 md:hidden">
+        <div className="flex items-center gap-2 lg:hidden">
           <ThemeToggle />
           <Sheet open={open} onOpenChange={setOpen}>
             <SheetTrigger asChild>
