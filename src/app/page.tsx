@@ -1,5 +1,3 @@
-'use client'
-
 import { Navbar } from '@/components/kdx/navbar'
 import { Hero } from '@/components/kdx/hero'
 import { ChannelsOverview } from '@/components/kdx/channels-overview'
@@ -17,6 +15,7 @@ import { SummarySection } from '@/components/kdx/summary-section'
 import { Footer } from '@/components/kdx/footer'
 import { BackToTop } from '@/components/kdx/back-to-top'
 import { Separator } from '@/components/ui/separator'
+import { channelsOverview, channelsDetail, summaryData, getAllVideoPlans } from '@/lib/channels'
 
 export default function Home() {
   return (
@@ -25,7 +24,7 @@ export default function Home() {
       <main className="flex-1">
         <Hero />
         <Separator className="mx-auto max-w-7xl opacity-20" />
-        <ChannelsOverview />
+        <ChannelsOverview channels={channelsOverview} />
         <Separator className="mx-auto max-w-7xl opacity-20" />
         <BrandGuidelines />
         <Separator className="mx-auto max-w-7xl opacity-20" />
@@ -33,9 +32,9 @@ export default function Home() {
         <Separator className="mx-auto max-w-7xl opacity-20" />
         <ThumbnailPreview />
         <Separator className="mx-auto max-w-7xl opacity-20" />
-        <VideoSearch />
+        <VideoSearch allVideos={getAllVideoPlans()} />
         <Separator className="mx-auto max-w-7xl opacity-20" />
-        <ChannelsSection />
+        <ChannelsSection channels={channelsDetail} />
         <Separator className="mx-auto max-w-7xl opacity-20" />
         <ScriptTemplates />
         <Separator className="mx-auto max-w-7xl opacity-20" />
@@ -47,7 +46,7 @@ export default function Home() {
         <Separator className="mx-auto max-w-7xl opacity-20" />
         <KdenliveReference />
         <Separator className="mx-auto max-w-7xl opacity-20" />
-        <SummarySection />
+        <SummarySection summaryData={summaryData} />
       </main>
       <Footer />
       <BackToTop />

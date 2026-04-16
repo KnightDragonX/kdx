@@ -13,16 +13,16 @@ import {
 } from '@/components/ui/sheet'
 
 const navLinks = [
-  { label: 'Overview', href: '#overview' },
-  { label: 'Brand Guide', href: '#brand' },
-  { label: 'Thumbnail Guide', href: '#thumbnail' },
-  { label: 'Search', href: '#search' },
-  { label: 'Channels', href: '#channels' },
-  { label: 'Scripts', href: '#script-templates' },
-  { label: 'Recording', href: '#recording-setup' },
-  { label: 'Footage', href: '#footage' },
-  { label: 'Tools', href: '#tools' },
-  { label: 'Summary', href: '#summary' },
+  { label: 'Overview', href: '/#overview' },
+  { label: 'Brand Guide', href: '/#brand' },
+  { label: 'Thumbnail Guide', href: '/#thumbnail' },
+  { label: 'Search', href: '/#search' },
+  { label: 'Channels', href: '/#channels' },
+  { label: 'Scripts', href: '/#script-templates' },
+  { label: 'Recording', href: '/#recording-setup' },
+  { label: 'Footage', href: '/#footage' },
+  { label: 'Tools', href: '/#tools' },
+  { label: 'Summary', href: '/#summary' },
 ]
 
 export function Navbar() {
@@ -30,9 +30,13 @@ export function Navbar() {
 
   const handleClick = (href: string) => {
     setOpen(false)
-    const el = document.querySelector(href)
-    if (el) {
-      el.scrollIntoView({ behavior: 'smooth' })
+    if (href.startsWith('/#')) {
+      const el = document.querySelector(href.substring(1))
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth' })
+      }
+    } else {
+      window.location.href = href
     }
   }
 

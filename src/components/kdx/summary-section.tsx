@@ -1,6 +1,5 @@
 'use client'
 
-import { summaryData } from '@/lib/channels'
 import { Table2 } from 'lucide-react'
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
@@ -13,7 +12,19 @@ import {
   TableRow,
 } from '@/components/ui/table'
 
-export function SummarySection() {
+interface SummaryRow {
+  channel: string
+  primaryVisual: string
+  recordingFocus: string
+  bRollNeeded: string
+  videoLength: string
+}
+
+interface SummarySectionProps {
+  summaryData: SummaryRow[]
+}
+
+export function SummarySection({ summaryData }: SummarySectionProps) {
   return (
     <section id="summary" className="py-16 md:py-24">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">

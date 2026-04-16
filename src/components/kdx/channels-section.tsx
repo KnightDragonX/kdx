@@ -11,7 +11,6 @@ import {
 } from 'lucide-react'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { Badge } from '@/components/ui/badge'
-import { channelsDetail } from '@/lib/channels'
 import { ChannelDetail, type ChannelData } from './channel-detail'
 
 const iconMap: Record<string, LucideIcon> = {
@@ -23,16 +22,17 @@ const iconMap: Record<string, LucideIcon> = {
   Terminal,
 }
 
-// Map string icon names to actual Lucide components for ChannelDetail
-function mapDetailData(detail: typeof channelsDetail[0]): ChannelData {
-  return {
-    ...detail,
-    icon: iconMap[detail.icon] || Bot,
-  }
+interface ChannelsSectionProps {
+  channels: any[]
 }
 
-export function ChannelsSection() {
-  const mappedData = channelsDetail.map(mapDetailData)
+export function ChannelsSection({ channels }: ChannelsSectionProps) {
+  // Map string icon names to actual Lucide components
+  const mappedData: ChannelData[] = channels.map((detail) => ({
+    ...detail,
+    icon: iconMap[detail.icon] || Bot,
+    workflow: typeof detail.workflow === 'string' ? JSON.parse(detail.workflow) : detail.workflow,
+  }))
 
   return (
     <section id="channels" className="py-16 md:py-24">
@@ -56,7 +56,7 @@ export function ChannelsSection() {
           <div className="mb-6 -mx-4 overflow-x-auto px-4 sm:mx-0 sm:px-0">
             <TabsList className="inline-flex w-max gap-1">
               {mappedData.map((channel) => {
-                const Icon = channel.icon
+                const Icon = iconMap[channel.icon] || Bot
                 return (
                   <TabsTrigger
                     key={channel.slug}

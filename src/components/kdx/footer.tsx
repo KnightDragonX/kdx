@@ -24,17 +24,36 @@ const socialLinks = [
 export function Footer() {
   const [email, setEmail] = useState('')
   const [subscribed, setSubscribed] = useState(false)
+  const [loading, setLoading] = useState(false)
 
   const handleClick = (href: string) => {
     const el = document.querySelector(href)
     if (el) el.scrollIntoView({ behavior: 'smooth' })
   }
 
-  const handleSubscribe = (e: React.FormEvent) => {
+  const handleSubscribe = async (e: React.FormEvent) => {
     e.preventDefault()
-    if (email.trim()) {
-      setSubscribed(true)
-      setEmail('')
+    if (!email.trim() || loading) return
+
+    setLoading(true)
+    try {
+      const response = await fetch('/api/newsletter', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email }),
+      })
+
+      if (response.ok) {
+        setSubscribed(true)
+        setEmail('')
+      } else {
+        const errorData = await response.json()
+        console.error('Subscription failed:', errorData.message)
+      }
+    } catch (error) {
+      console.error('Network error during subscription:', error)
+    } finally {
+      setLoading(false)
     }
   }
 
@@ -130,14 +149,16 @@ export function Footer() {
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="hacker@example.com"
                   required
-                  className="h-9 flex-1 rounded-md border border-input bg-background px-3 text-sm text-foreground placeholder:text-muted-foreground focus:border-primary/30 focus:outline-none focus:ring-2 focus:ring-primary/20"
+                  disabled={loading}
+                  className="h-9 flex-1 rounded-md border border-input bg-background px-3 text-sm text-foreground placeholder:text-muted-foreground focus:border-primary/30 focus:outline-none focus:ring-2 focus:ring-primary/20 disabled:opacity-50"
                 />
                 <Button
                   type="submit"
                   size="sm"
-                  className="h-9 shrink-0 kdx-glow"
+                  disabled={loading}
+                  className="h-9 shrink-0 kdx-glow disabled:opacity-50"
                 >
-                  Notify Me
+                  {loading ? 'Subscribing...' : 'Notify Me'}
                 </Button>
               </form>
             )}
@@ -148,11 +169,11 @@ export function Footer() {
 
         <div className="flex flex-col items-center justify-between gap-4 sm:flex-row">
           <p className="text-xs text-muted-foreground">
-            &copy; {new Date().getFullYear()} Knight Dragon X. All rights reserved.
+            &copy; {new Date().getFullYear()} K.D.Sithara Nimsara. All rights reserved.
           </p>
           <p className="text-xs text-muted-foreground">
             <span className="font-mono kdx-code text-primary/60">
-              $ echo &quot;Stay curious. Stay dangerous.&quot;
+              $ echo &quot;Created by K.D.Sithara Nimsara&quot;
             </span>
           </p>
         </div>

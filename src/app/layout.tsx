@@ -29,7 +29,7 @@ export const metadata: Metadata = {
     "YouTube content creator",
     "HTB style",
   ],
-  authors: [{ name: "Knight Dragon X" }],
+  authors: [{ name: "K.D.Sithara Nimsara" }],
   icons: {
     icon: "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐉</text></svg>",
   },

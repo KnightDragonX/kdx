@@ -1,6 +1,6 @@
 'use client'
 
-import type { LucideIcon } from 'lucide-react'
+import { Bot, Shield, Flag, Newspaper, Wrench, Terminal, type LucideIcon } from 'lucide-react'
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import {
@@ -11,6 +11,15 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table'
+
+const iconMap: Record<string, LucideIcon> = {
+  Bot,
+  Shield,
+  Flag,
+  Newspaper,
+  Wrench,
+  Terminal,
+}
 
 export interface WorkflowStep {
   step: string
@@ -27,7 +36,8 @@ export interface VideoPlan {
 
 export interface ChannelData {
   name: string
-  icon: LucideIcon
+  slug: string
+  icon: string
   description: string
   workflow?: WorkflowStep[]
   videos: VideoPlan[]
@@ -39,7 +49,7 @@ interface ChannelDetailProps {
 }
 
 export function ChannelDetail({ channel }: ChannelDetailProps) {
-  const Icon = channel.icon
+  const Icon = iconMap[channel.icon] || Bot
 
   return (
     <div className="space-y-6">

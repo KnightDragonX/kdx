@@ -3,12 +3,22 @@
 import { useState, useMemo } from 'react'
 import { Search, X } from 'lucide-react'
 import { Badge } from '@/components/ui/badge'
-import { getAllVideoPlans } from '@/lib/channels'
 
-export function VideoSearch() {
+interface VideoPlan {
+  number: number
+  title: string
+  tools: string
+  keyLearning: string
+  channelName: string
+  channelSlug: string
+}
+
+interface VideoSearchProps {
+  allVideos: VideoPlan[]
+}
+
+export function VideoSearch({ allVideos }: VideoSearchProps) {
   const [query, setQuery] = useState('')
-
-  const allVideos = useMemo(() => getAllVideoPlans(), [])
 
   const filtered = useMemo(() => {
     if (!query.trim()) return []
