@@ -56,7 +56,9 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          {children}
+          <div className="flex min-h-screen flex-col kdx-grid-bg">
+            {children}
+          </div>
         </ThemeProvider>
       </body>
     </html>
